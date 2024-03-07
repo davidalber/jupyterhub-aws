@@ -6,6 +6,7 @@ commands, your JupyterHub instance is ready to go.
 
 As written in this repository, Terraform will:
 - Deploy all resources to the AWS us-west-2 region
+- Create a VPC named "jupyterhub"
 
 ## Customizing
 
@@ -30,3 +31,8 @@ In addition to the required changes to the backend configuration
 described above, you may change the following values:
 - `key`: The key in the S3 bucket into which state will be written.
 - `region`: The AWS region of the S3 bucket.
+
+### VPC
+
+You may change the name of the VPC in vars.tf by changing the
+`vpc_name` variable declaration.
