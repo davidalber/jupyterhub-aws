@@ -11,3 +11,10 @@ variable "vpc_name" {
   default     = "jupyterhub"
   description = "Name of the VPC."
 }
+
+variable "internet_gateway_name" {
+  type        = string
+  nullable    = false
+  default     = "jupyterhub"
+  description = "Name of the internet gateway created in the VPC."
+}

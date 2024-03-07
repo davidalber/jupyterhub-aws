@@ -32,7 +32,9 @@ described above, you may change the following values:
 - `key`: The key in the S3 bucket into which state will be written.
 - `region`: The AWS region of the S3 bucket.
 
-### VPC
+### Networking
 
-You may change the name of the VPC in vars.tf by changing the
-`vpc_name` variable declaration.
+You may change the following networking-related values in vars.tf:
+- `vpc_name`: The name assigned to the VPC.
+- `internet_gateway_name`: The name assigned to the VPC's internet
+  gateway.
