@@ -18,3 +18,17 @@ variable "internet_gateway_name" {
   default     = "jupyterhub"
   description = "Name of the internet gateway created in the VPC."
 }
+
+variable "subnet_name" {
+  type        = string
+  nullable    = false
+  default     = "jupyterhub"
+  description = "Name of the VPC subnet."
+}
+
+variable "route_table_name" {
+  type        = string
+  nullable    = false
+  default     = "jupyterhub public"
+  description = "Name of the subnet route table."
+}

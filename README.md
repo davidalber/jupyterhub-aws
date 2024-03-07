@@ -38,3 +38,5 @@ You may change the following networking-related values in vars.tf:
 - `vpc_name`: The name assigned to the VPC.
 - `internet_gateway_name`: The name assigned to the VPC's internet
   gateway.
+- `subnet_name`: The VPC subnet name.
+- `route_table_name`: Subnet route table name.
