@@ -11,7 +11,7 @@ resource "aws_security_group" "jupyterhub" {
   }
 }
 
-resource "aws_vpc_security_group_ingress_rule" "jupyterhub_http" {
+resource "aws_vpc_security_group_ingress_rule" "jupyterhub_http_ipv4" {
   security_group_id = aws_security_group.jupyterhub.id
 
   cidr_ipv4   = "0.0.0.0/0"
@@ -20,10 +20,28 @@ resource "aws_vpc_security_group_ingress_rule" "jupyterhub_http" {
   ip_protocol = "tcp"
 }
 
-resource "aws_vpc_security_group_ingress_rule" "jupyterhub_https" {
+resource "aws_vpc_security_group_ingress_rule" "jupyterhub_http_ipv6" {
+  security_group_id = aws_security_group.jupyterhub.id
+
+  cidr_ipv6   = "::/0"
+  from_port   = 80
+  to_port     = 80
+  ip_protocol = "tcp"
+}
+
+resource "aws_vpc_security_group_ingress_rule" "jupyterhub_https_ipv4" {
   security_group_id = aws_security_group.jupyterhub.id
 
   cidr_ipv4   = "0.0.0.0/0"
+  from_port   = 443
+  to_port     = 443
+  ip_protocol = "tcp"
+}
+
+resource "aws_vpc_security_group_ingress_rule" "jupyterhub_https_ipv6" {
+  security_group_id = aws_security_group.jupyterhub.id
+
+  cidr_ipv6   = "::/0"
   from_port   = 443
   to_port     = 443
   ip_protocol = "tcp"
