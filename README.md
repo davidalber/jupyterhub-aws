@@ -36,6 +36,9 @@ You must set the following values in vars.tf:
   necessary IP addresses. This can be accomplished by providing the
   desired CIDR ranges in the set (e.g., `["54.166.129.219/32"]`).
 
+  While not recommended, if you prefer to allow connection from all IP
+  addresses, that is accomplished with `[0.0.0.0/0]`.
+
   Until setup is complete, you must authorize at least your own IP
   address. After configuration when SSH connectivity is not needed, it
   is a good idea to remove that authorization.
