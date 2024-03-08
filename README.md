@@ -7,6 +7,8 @@ commands, your JupyterHub instance is ready to go.
 As written in this repository, Terraform will:
 - Deploy all resources to the AWS us-west-2 region
 - Create a VPC named "jupyterhub"
+- Set up a security group with HTTP, HTTPS, SSH, and Mosh ingress
+  rules
 
 ## Customizing
 
@@ -40,3 +42,16 @@ You may change the following networking-related values in vars.tf:
   gateway.
 - `subnet_name`: The VPC subnet name.
 - `route_table_name`: Subnet route table name.
+
+### Security Group
+
+You may affect the security group by changing the following values in
+vars.tf:
+- `security_group_name`: The name of the security group attached to
+  the EC2 instance.
+- `ssh_cidrs`: CIDR ranges from which SSH and Mosh connections will be
+  accepted. It is good practice to disallow SSH access, except when
+  needed. This is accomplished by leaving the set empty. It is also
+  good practice, when allowing SSH access, to limit authorizations to
+  necessary IP addresses. This can be accomplished by providing the
+  desired CIDR ranges in the set (e.g., `["54.166.129.219/32"]`).

@@ -32,3 +32,17 @@ variable "route_table_name" {
   default     = "jupyterhub public"
   description = "Name of the subnet route table."
 }
+
+variable "security_group_name" {
+  type        = string
+  nullable    = false
+  default     = "jupyterhub"
+  description = "Name of the JupyterHub EC2 security group."
+}
+
+variable "ssh_cidrs" {
+  type        = set(string)
+  nullable    = false
+  default     = []
+  description = "List of CIDR ranges from which to allow SSH connections."
+}
