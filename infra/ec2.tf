@@ -55,3 +55,30 @@ resource "aws_vpc_security_group_egress_rule" "jupyterhub_out" {
   cidr_ipv4   = "0.0.0.0/0"
   ip_protocol = -1
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// Instance
+///////////////////////////////////////////////////////////////////////////////
+resource "aws_instance" "jupyterhub" {
+  ami           = "ami-012bf399e76fe4368" // Ubuntu 22.04
+  instance_type = var.ec2_instance_type
+  subnet_id     = aws_subnet.jupyterhub.id
+
+  vpc_security_group_ids = [aws_security_group.jupyterhub.id]
+
+  root_block_device {
+    volume_size = var.ebs_volume_size
+  }
+
+  metadata_options {
+    http_tokens = "required"
+  }
+
+  tags = {
+    Name = var.ec2_instance_name
+  }
+
+  user_data = base64encode(templatefile("ec2_user_data.yaml", {
+    ssh_public_key = var.authorized_ssh_key
+  }))
+}

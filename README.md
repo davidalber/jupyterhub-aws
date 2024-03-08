@@ -26,6 +26,12 @@ are:
   to. Note that this bucket must already exist; this Terraform module
   does not create the S3 bucket for you.
 
+### EC2 Instance
+
+Set the following value in vars.tf:
+- `authorized_ssh_key`: In order to connect to and complete setup of
+  the instance, it is necessary to provide a public SSH key at launch.
+
 ## Optional Changes
 ### Backend Configuration
 
@@ -55,3 +61,18 @@ vars.tf:
   good practice, when allowing SSH access, to limit authorizations to
   necessary IP addresses. This can be accomplished by providing the
   desired CIDR ranges in the set (e.g., `["54.166.129.219/32"]`).
+
+### EC2 Instance
+
+You can customize the EC2 instance by changing the following values in
+vars.tf:
+- `ec2_instance_name`: The name of the EC2 instance. Default:
+  "jupyterhub".
+- `ec2_instance_type`: The EC2 instance type. The instance must be an
+  ARM-based architecture because the AMI is built for an ARM
+  instance. The default is t4g.small, which has 2GB of RAM. JupyterHub
+  documentation recommends 2GB of RAM, it says that 1GB is an option,
+  although it will have reduced performance. If you want to reduce
+  costs and run an instance with 1GB of RAM, select t4g.micro.
+- `ebs_volume_size`: The amount of storage attached to the EC2
+  instance, in GB. Default: 8.
