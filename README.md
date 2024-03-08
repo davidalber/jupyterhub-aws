@@ -26,6 +26,20 @@ are:
   to. Note that this bucket must already exist; this Terraform module
   does not create the S3 bucket for you.
 
+### Security Group
+
+You must set the following values in vars.tf:
+- `ssh_cidrs`: CIDR ranges from which SSH and Mosh connections will be
+  accepted. It is good practice to disallow SSH access, except when
+  needed. This is accomplished by leaving the set empty. It is also
+  good practice, when allowing SSH access, to limit authorizations to
+  necessary IP addresses. This can be accomplished by providing the
+  desired CIDR ranges in the set (e.g., `["54.166.129.219/32"]`).
+
+  Until setup is complete, you must authorize at least your own IP
+  address. After configuration when SSH connectivity is not needed, it
+  is a good idea to remove that authorization.
+
 ### EC2 Instance
 
 Set the following value in vars.tf:
@@ -55,12 +69,6 @@ You may affect the security group by changing the following values in
 vars.tf:
 - `security_group_name`: The name of the security group attached to
   the EC2 instance.
-- `ssh_cidrs`: CIDR ranges from which SSH and Mosh connections will be
-  accepted. It is good practice to disallow SSH access, except when
-  needed. This is accomplished by leaving the set empty. It is also
-  good practice, when allowing SSH access, to limit authorizations to
-  necessary IP addresses. This can be accomplished by providing the
-  desired CIDR ranges in the set (e.g., `["54.166.129.219/32"]`).
 
 ### EC2 Instance
 
