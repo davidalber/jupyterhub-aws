@@ -51,24 +51,26 @@ Set the following value in vars.tf:
 
 In addition to the required changes to the backend configuration
 described above, you may change the following values:
-- `key`: The key in the S3 bucket into which state will be written.
-- `region`: The AWS region of the S3 bucket.
+- `key`: The key in the S3 bucket into which state will be
+  written. Default "jupyterhub-aws/terraform.tfstate".
+- `region`: The AWS region of the S3 bucket. Default: "us-west-2".
 
 ### Networking
 
 You may change the following networking-related values in vars.tf:
-- `vpc_name`: The name assigned to the VPC.
+- `vpc_name`: The name assigned to the VPC. Default: "jupyterhub".
 - `internet_gateway_name`: The name assigned to the VPC's internet
-  gateway.
-- `subnet_name`: The VPC subnet name.
-- `route_table_name`: Subnet route table name.
+  gateway. Default: "jupyterhub".
+- `subnet_name`: The VPC subnet name. Default: "jupyterhub".
+- `route_table_name`: Subnet route table name. default: "jupyterhub
+  public".
 
 ### Security Group
 
 You may affect the security group by changing the following values in
 vars.tf:
 - `security_group_name`: The name of the security group attached to
-  the EC2 instance.
+  the EC2 instance. Default: "jupyterhub".
 
 ### EC2 Instance
 
