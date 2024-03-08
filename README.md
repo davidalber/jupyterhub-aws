@@ -5,10 +5,10 @@ resources and deploy a JupyterHub instance. After running two
 commands, your JupyterHub instance is ready to go.
 
 As written in this repository, Terraform will:
-- Deploy all resources to the AWS us-west-2 region
-- Create a VPC named "jupyterhub"
+- Deploy all resources to the AWS us-west-2 region.
+- Create a VPC named "jupyterhub".
 - Set up a security group with HTTP, HTTPS, SSH, and Mosh ingress
-  rules
+  rules.
 
 ## Customizing
 
