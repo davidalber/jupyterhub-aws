@@ -1,0 +1,4 @@
+[jupyterhub]
+# Copy this file to inventory and replace the domain placeholder with your
+# JupyterHub domain name (preferred) or your EC2 instance IP address.
+jupyterhub.somewhere.com    ansible_user=ubuntu

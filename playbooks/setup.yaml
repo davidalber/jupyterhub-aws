@@ -1,0 +1,6 @@
+---
+- name: Configure JupyterHub instance
+  hosts: jupyterhub
+
+- import_playbook: jupyterhub-setup.yaml
+- import_playbook: ssl-setup.yaml

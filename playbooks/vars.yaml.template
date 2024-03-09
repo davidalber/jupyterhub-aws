@@ -1,0 +1,6 @@
+---
+# Copy this file to vars.yml and populate the values for your situation.
+jupyterhub_admin: admin
+enable_ssl: yes
+letsencrypt_email: someone@somewhere.com
+letsencrypt_domain: jupyterhub.somewhere.com

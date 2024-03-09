@@ -1,0 +1,29 @@
+---
+- name: JupyterHub setup
+  hosts: jupyterhub
+  vars_files:
+    - vars.yaml
+  become: true
+
+  tasks:
+    - name: Check JupyterHub service status
+      ansible.builtin.systemd:
+        name: "jupyterhub"
+      register: jupyterhub_service_status
+
+    - name: Fetch JupyterHub bootstrap file
+      ansible.builtin.get_url:
+        url: https://tljh.jupyter.org/bootstrap.py
+        dest: /tmp/bootstrap.py
+        mode: '0644'
+      when: jupyterhub_service_status.status.ActiveState != "active"
+
+    - name: Run JupyterHub bootstrap
+      ansible.builtin.command:
+        cmd: python3 /tmp/bootstrap.py --admin {{ jupyterhub_admin }}
+      when: jupyterhub_service_status.status.ActiveState != "active"
+
+    - name: Remove JupyterHub bootstrap file
+      ansible.builtin.file:
+        path: /tmp/bootstrap.py
+        state: absent

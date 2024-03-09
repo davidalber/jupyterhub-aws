@@ -1,0 +1,42 @@
+---
+- name: JupyterHub SSL setup
+  hosts: jupyterhub
+  vars_files:
+    - vars.yaml
+  become: true
+
+  tasks:
+    - name: Check if JupyterHub SSL is configured
+      ansible.builtin.shell:
+        cmd: tljh-config show | grep https
+      ignore_errors: true
+      register: ssl_status
+      when: enable_ssl
+
+    - name: Enable SSL
+      ansible.builtin.command:
+        cmd: tljh-config set https.enabled true
+      when:
+        - enable_ssl
+        - ssl_status.rc == 1
+
+    - name: Set Let's Encrypt email
+      ansible.builtin.command:
+        cmd: tljh-config set https.letsencrypt.email {{ letsencrypt_email }}
+      when:
+        - enable_ssl
+        - ssl_status.rc == 1
+
+    - name: Set Let's Encrypt domain
+      ansible.builtin.command:
+        cmd: tljh-config add-item https.letsencrypt.domains  {{ letsencrypt_domain }}
+      when:
+        - enable_ssl
+        - ssl_status.rc == 1
+
+    - name: Reload configuration (create SSL certificate)
+      ansible.builtin.command:
+        cmd: tljh-config reload proxy
+      when:
+        - enable_ssl
+        - ssl_status.rc == 1
