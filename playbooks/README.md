@@ -7,7 +7,7 @@ Ansible.
 
 The playbooks in this directory do the following:
 - Install JupyterHub on the EC2 instance.
-- Sets up SSL for the JupyterHub instance so that users communicate
+- Set up SSL for the JupyterHub instance so that users communicate
   securely over HTTPS.
 
 ## Prerequisites
@@ -24,7 +24,7 @@ virtual environment and install Ansible into it. For instance:
 # Assuming `python` is Python 3.
 $ python -m venv ansible_env  # Create a virtual environment named ansible_env
 $ . ansible_env/bin/activate  # Activate the virtual environment
-(ansible_env) $ pip install ansible  # Install Ansible in the virtual env
+(ansible_env) $ pip install ansible  # Install Ansible in the virtual environment
 .
 .
 .
@@ -40,8 +40,8 @@ ansible [core 2.16.4]
 
 You need to do some configuration before running Ansible. Follow these
 steps:
-1. Copy inventory.template to inventory. Update the domain name in the
-   new file.
+1. Copy the inventory.template file to inventory. Update the domain
+   name in the new file.
 
    If you are not deploying JupyterHub with a custom domain, use the
    EC2 instance's IP address. Note: this is not a good production
@@ -57,16 +57,16 @@ steps:
    It is preferred to leave `enable_ssl` as `yes` if you are using a
    custom domain. If you are not using a custom domain, put `no`. If
    SSL is enabled, you must provide values for `letsencrypt_email` and
-   `letsencrypt_domain`. If it is not enabled, the `letsencrypt_*` may
-   be left unchanged.
+   `letsencrypt_domain`. If it is not enabled, the `letsencrypt_*`
+   values may be left unchanged.
 
    The `letsencrypt_email` value is provided to Let's Encrypt, the SSL
    certificate provider. Let's Encrypt sends notifications to this
    email address if a certificate registered with it is at risk of
    expiring.
 
-   The `letsencrypt_domain` is the domain that you have configured to
-   point to the JupyterHub instance.
+   The `letsencrypt_domain` value is the domain that you have
+   configured to point to the JupyterHub instance.
 
 ## Executing the Set Up
 
