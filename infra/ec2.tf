@@ -100,3 +100,7 @@ resource "aws_instance" "jupyterhub" {
     ssh_public_key = var.authorized_ssh_key
   }))
 }
+
+output "jupyterhub_instance_ip_addr" {
+  value = aws_instance.jupyterhub.public_ip
+}
