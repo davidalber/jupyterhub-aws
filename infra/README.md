@@ -7,6 +7,13 @@ will:
   rules.
 - Create an EC2 instance on which to run JupyterHub.
 
+Terraform will store state in a local file. I would typically store
+Terraform state in an S3 backend to be more robust, but I wanted to
+keep this setup as low friction as possible. If you would prefer to
+store the state in an S3 bucket, remove the `backend "local"` block
+from terraform.tf, uncomment the `backend "s3"` block, and configure
+it as needed for your case.
+
 ## Prerequisites
 
 You must have Terraform installed. See [Install
@@ -43,8 +50,8 @@ You must set the following values in vars.tf:
   addresses, that is accomplished with `[0.0.0.0/0]`.
 
   Until setup is complete, you must authorize at least your own IP
-  address. After configuration when SSH connectivity is not needed, it
-  is a good idea to remove that authorization.
+  address. After completing the Ansible steps later, it is a good idea
+  to remove that authorization.
 
 ### EC2 Instance
 
@@ -92,3 +99,36 @@ vars.tf:
   costs and run an instance with 1GB of RAM, select t4g.micro.
 - `ebs_volume_size`: The amount of storage attached to the EC2
   instance, in GB. Default: 8.
+
+## Executing the Set Up
+
+### Initialization
+
+The Terraform module must be initialized before you can use it. This
+only needs to be done once, unless subsequent changes are made in
+terraform.tf.
+
+```bash
+$ terraform init
+```
+
+### Creating the Infrastructure
+
+To alter the infrastructure to match the Terraform module's configuration, do:
+
+```bash
+$ terraform apply
+```
+
+Once this completes successfully, the infrastructure is set up. Note
+that the IP address of the EC2 instance onto which JupyterHub will be
+deployed is output. You will need it later.
+
+## Tearing Down the JupyterHub Infrastructure
+
+If you want to shut down and destroy the infrastructure set up by this
+module, do:
+
+```bash
+$ terraform destroy
+```
