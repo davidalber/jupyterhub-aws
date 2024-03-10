@@ -1,11 +1,15 @@
 terraform {
   required_version = "~> 1.7.0"
 
-  backend "s3" {
-    bucket = "dma-tf-state"
-    key    = "jupyterhub-aws/terraform.tfstate"
-    region = "us-west-2"
+  backend "local" {
+    path = "terraform.tfstate"
   }
+
+  # backend "s3" {
+  #   bucket = "EXISTING-BUCKET-NAME"
+  #   key    = "jupyterhub-aws/terraform.tfstate"  # or whatever you like
+  #   region = "us-west-2"  # or a different region
+  # }
 
   required_providers {
     aws = {
