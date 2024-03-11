@@ -1,14 +1,14 @@
 # JupyterHub AWS Ansible Playbooks
 
 This directory contains Ansible playbooks that are run after Terraform
-creates the infrastructure. Thus, if the infrastructure has not yet
-been created, go back and complete the Terraform steps before running
+creates the infrastructure. If the infrastructure has not yet been
+created, go back and complete the Terraform steps before running
 Ansible.
 
 The playbooks in this directory do the following:
-- Install JupyterHub on the EC2 instance.
+- Install JupyterHub on the EC2 instance
 - Set up SSL for the JupyterHub instance so that users communicate
-  securely over HTTPS.
+  securely over HTTPS
 
 ## Prerequisites
 
@@ -66,7 +66,8 @@ steps:
    expiring.
 
    The `letsencrypt_domain` value is the domain that you have
-   configured to point to the JupyterHub instance.
+   configured to point to the JupyterHub instance (i.e., the same
+   domain you put in the inventory file).
 
 ## Executing the Set Up
 
