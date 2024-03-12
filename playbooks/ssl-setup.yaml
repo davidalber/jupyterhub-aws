@@ -9,9 +9,9 @@
     - name: Check if JupyterHub SSL is configured
       ansible.builtin.shell:
         cmd: tljh-config show | grep https
-      ignore_errors: true
       register: ssl_status
       when: enable_ssl
+      failed_when: (ssl_status.rc not in [0, 1])
 
     - name: Enable SSL
       ansible.builtin.command:
