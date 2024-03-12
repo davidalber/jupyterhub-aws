@@ -17,6 +17,10 @@ The downside of this approach is that you will need to install
 additional dependencies, whereas the manual approach from the guide is
 done entirely from the AWS console.
 
+The code in this repository also sets up HTTPS, which is covered in a
+different TLJH guide: [Enable
+HTTPS](https://tljh.jupyter.org/en/latest/howto/admin/https.html).
+
 The process is broken down into steps:
 - [Set up infrastructure with Terraform](infra/README.md)
 - [Configure the domain DNS record](dns-configuration.md)
