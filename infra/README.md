@@ -5,8 +5,7 @@ infrastructure to run your JupyterHub instance. This Terraform step
 will:
 - Deploy all resources to the AWS us-west-2 region
 - Create a VPC
-- Set up a security group with HTTP, HTTPS, SSH, and Mosh ingress
-  rules
+- Set up a security group with HTTP, HTTPS, and SSH ingress rules
 - Create an EC2 instance on which to run JupyterHub
 
 Terraform will store state in a local file. I would typically store
@@ -35,7 +34,7 @@ and you can optionally change other values.
 #### Security Group
 
 You must set the following values in vars.tf:
-- `ssh_cidrs`: CIDR ranges from which SSH and Mosh connections will be
+- `ssh_cidrs`: CIDR ranges from which SSH connections will be
   accepted. It is good practice to disallow SSH access, except when
   needed. This is accomplished by leaving the set empty. It is also
   good practice, when allowing SSH access, to limit authorizations to

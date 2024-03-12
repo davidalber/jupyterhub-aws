@@ -57,16 +57,6 @@ resource "aws_vpc_security_group_ingress_rule" "jupyterhub_ssh" {
   ip_protocol = "tcp"
 }
 
-resource "aws_vpc_security_group_ingress_rule" "jupyterhub_mosh" {
-  for_each          = var.ssh_cidrs
-  security_group_id = aws_security_group.jupyterhub.id
-
-  cidr_ipv4   = each.value
-  from_port   = 60000
-  to_port     = 61000
-  ip_protocol = "udp"
-}
-
 resource "aws_vpc_security_group_egress_rule" "jupyterhub_out" {
   security_group_id = aws_security_group.jupyterhub.id
 
