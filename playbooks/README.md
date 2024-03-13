@@ -90,5 +90,8 @@ by doing:
 $ ansible-playbook -i inventory setup.yaml
 ```
 
+![Effect of Ansible
+playbook](https://github.com/davidalber/screengifs/blob/main/jupyterhub-aws/ansible.gif)
+
 Once this is complete, head to the configured domain (or IP address)
 in a browser and create a password for your admin user.
