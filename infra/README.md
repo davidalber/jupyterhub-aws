@@ -107,6 +107,9 @@ To alter the infrastructure to match the Terraform module's configuration, do:
 $ terraform apply
 ```
 
+![Effect of `terraform
+apply`](https://github.com/davidalber/screengifs/blob/main/jupyterhub-aws/terraform-apply.gif)
+
 Once this completes successfully, the infrastructure is set up. Note
 that the IP address of the EC2 instance is output. Make a note of it
 because you will need it later.
