@@ -38,8 +38,7 @@ mean a lot to me. Feel free to send feedback or other thoughts.
 
 If I were using this in a shared environment with real users, there's
 more that I would do. If something can be added to help you, let me
-know. I might find time to add it. Some potential features that are on
-my mind follow.
+know. I might find time to add it. Some potential features follow.
 
 ### Backups
 
