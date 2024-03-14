@@ -28,6 +28,13 @@ The process is broken down into steps:
   Ansible](playbooks/README.md)
 - [Deny all access to SSH](deny-ssh-access.md)
 
+When the process is complete, you will have a web service through
+which users can work on Jupyter notebooks without needing to set up
+Python and Jupyter on their own machines.
+
+![New JupyterHub user
+account](https://github.com/davidalber/repo-assets/blob/main/jupyterhub-aws/jupyterhub-fresh.png)
+
 ## Feedback
 
 I set this up because I was curious what operationalizing JupyterHub
