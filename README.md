@@ -38,7 +38,7 @@ mean a lot to me. Feel free to send feedback or other thoughts.
 
 If I were using this in a shared environment with real users, there's
 more that I would do. If something can be added to help you, let me
-know. I might find time to add it. Two important features that are on
+know. I might find time to add it. Some potential features that are on
 my mind follow.
 
 ### Backups
@@ -57,3 +57,10 @@ everyone. TLJH has the guide [Install conda / pip packages for all
 users](https://tljh.jupyter.org/en/latest/install/amazon.html#step-3-install-conda-pip-packages-for-all-users),
 but I would investigate doing this in an Ansible playbook so that the
 environment is more reproducible.
+
+### DNS Configuration with Route53
+
+For a fully-coded setup, I would manage DNS with Route53. To avoid
+extra complication for potential users, I didn't do that
+here. However, it might be nice to have optional configuration for
+Route53 users.
