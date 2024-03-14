@@ -64,3 +64,16 @@ For a fully-coded setup, I would manage DNS with Route53. To avoid
 extra complication for potential users, I didn't do that
 here. However, it might be nice to have optional configuration for
 Route53 users.
+
+## Features Considered and Cut
+### Elastic IP
+
+An option that would simplify DNS configuration (at least if you ever
+need to replace the EC2 instance) would be to attach an Elastic
+IP. This would allow the user to have a fixed IP address across EC2
+instance redeployment.
+
+In the past, Elastic IP addresses were free while in use. AWS,
+however, recently added a fee to in-use addresses. Given that, I did
+not think that there would be demand for using an Elastic IP and did
+not implement it.
