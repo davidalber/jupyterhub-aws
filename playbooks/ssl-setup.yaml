@@ -7,7 +7,7 @@
 
   tasks:
     - name: Check current configuration
-      ansible.builtin.script: scripts/check_https_config.py {{ enable_ssl | bool }} {{ letsencrypt_email }} {{ letsencrypt_domain }}
+      ansible.builtin.script: scripts/check_https_config.py {{ enable_ssl | bool }} {{ letsencrypt_email }} {{ letsencrypt_domain }} {{ letsencrypt_test_cert }}
       args:
         executable: python3
       register: configlook
@@ -48,6 +48,22 @@
       when:
         - configlook.rc == 1
         - enable_ssl
+
+    - name: Remove Let's Encrypt staging
+      ansible.builtin.command:
+        cmd: tljh-config unset https.letsencrypt.staging
+      when:
+        - configlook.rc == 1
+      register: remove_staging
+      failed_when: (remove_staging.rc not in [0, 1])
+
+    - name: Set Let's Encrypt staging
+      ansible.builtin.command:
+        cmd: tljh-config set https.letsencrypt.staging true
+      when:
+        - configlook.rc == 1
+        - enable_ssl
+        - letsencrypt_test_cert
 
     - name: Reload configuration (create SSL certificate)
       ansible.builtin.command:

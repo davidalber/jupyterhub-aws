@@ -69,6 +69,18 @@ steps:
    configured to point to the JupyterHub instance (i.e., the same
    domain you put in the inventory file).
 
+   The `letsencrypt_test_cert` value specifies if a test SSL
+   certificate (`yes`) or a production SSL certificate (`no`) should
+   be created. If you are testing the deployment, you may want the
+   test certificate because production certificate creation is rate
+   limited. That is, if you create the infrastructure too many times
+   (which causes SSL certificate creation), then you may be eventually
+   unable to create a new production certificate for a while. The
+   downside of the test certificate is that web browsers will
+   determine it is invalid and you will need to instruct the browser
+   to accept the certificate. Once you are satisfied with the setup,
+   definitely change `letsencrypt_test_cert` to `no`.
+
 ## Executing the Set Up
 
 With configuration complete, you can use Ansible to set up JupyterHub
