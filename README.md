@@ -48,7 +48,7 @@ goes wrong. The most obvious option is snapshotting the EBS volume,
 but I would also investigate how JupyterHub can be backed up without a
 complete snapshot.
 
-### Installing System Packages
+### Installing System Packages with Ansible
 
 Users on JupyterHub can install packages into their own environments,
 but some packages are likely to be used by many users. In that
