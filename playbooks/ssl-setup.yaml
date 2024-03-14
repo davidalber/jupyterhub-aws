@@ -6,37 +6,51 @@
   become: true
 
   tasks:
-    - name: Check if JupyterHub SSL is configured
-      ansible.builtin.shell:
-        cmd: tljh-config show | grep https
-      register: ssl_status
-      when: enable_ssl
-      failed_when: (ssl_status.rc not in [0, 1])
+    - name: Check current configuration
+      ansible.builtin.script: scripts/check_https_config.py {{ enable_ssl | bool }} {{ letsencrypt_email }} {{ letsencrypt_domain }}
+      args:
+        executable: python3
+      register: configlook
+      failed_when: (configlook.rc not in [0, 1])
 
     - name: Enable SSL
       ansible.builtin.command:
-        cmd: tljh-config set https.enabled true
+        cmd: tljh-config set https.enabled {{ enable_ssl }}
       when:
-        - enable_ssl
-        - ssl_status.rc == 1
+        - configlook.rc == 1
+
+    - name: Remove Let's Encrypt email
+      ansible.builtin.command:
+        cmd: tljh-config unset https.letsencrypt.email
+      when:
+        - configlook.rc == 1
+      register: remove_email
+      failed_when: (remove_email.rc not in [0, 1])
 
     - name: Set Let's Encrypt email
       ansible.builtin.command:
         cmd: tljh-config set https.letsencrypt.email {{ letsencrypt_email }}
       when:
+        - configlook.rc == 1
         - enable_ssl
-        - ssl_status.rc == 1
+
+    - name: Remove Let's Encrypt domain
+      ansible.builtin.command:
+        cmd: tljh-config unset https.letsencrypt.domains
+      when:
+        - configlook.rc == 1
+      register: remove_domain
+      failed_when: (remove_domain.rc not in [0, 1])
 
     - name: Set Let's Encrypt domain
       ansible.builtin.command:
-        cmd: tljh-config add-item https.letsencrypt.domains  {{ letsencrypt_domain }}
+        cmd: tljh-config add-item https.letsencrypt.domains {{ letsencrypt_domain }}
       when:
+        - configlook.rc == 1
         - enable_ssl
-        - ssl_status.rc == 1
 
     - name: Reload configuration (create SSL certificate)
       ansible.builtin.command:
         cmd: tljh-config reload proxy
       when:
-        - enable_ssl
-        - ssl_status.rc == 1
+        - configlook.rc == 1
