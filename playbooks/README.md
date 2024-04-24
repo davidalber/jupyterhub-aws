@@ -87,7 +87,7 @@ With configuration complete, you can use Ansible to set up JupyterHub
 by doing:
 
 ```bash
-$ ansible-playbook -i inventory setup.yaml
+ansible-playbook -i inventory setup.yaml
 ```
 
 ![Effect of Ansible

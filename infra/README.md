@@ -96,7 +96,7 @@ only needs to be done once, unless subsequent changes are made in
 terraform.tf.
 
 ```bash
-$ terraform init
+terraform init
 ```
 
 ### Creating the Infrastructure
@@ -104,7 +104,7 @@ $ terraform init
 To alter the infrastructure to match the Terraform module's configuration, do:
 
 ```bash
-$ terraform apply
+terraform apply
 ```
 
 ![Effect of `terraform
@@ -120,5 +120,5 @@ If you want to shut down and destroy the infrastructure set up by this
 module, do:
 
 ```bash
-$ terraform destroy
+terraform destroy
 ```
