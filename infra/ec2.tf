@@ -68,7 +68,7 @@ resource "aws_vpc_security_group_egress_rule" "jupyterhub_out" {
 // Instance
 ///////////////////////////////////////////////////////////////////////////////
 resource "aws_instance" "jupyterhub" {
-  ami           = "ami-012bf399e76fe4368" // Ubuntu 22.04
+  ami           = "ami-0c29a2c5cf69b5a9c" // Ubuntu 24.04
   instance_type = var.ec2_instance_type
   subnet_id     = aws_subnet.jupyterhub.id
 
